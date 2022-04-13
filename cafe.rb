@@ -1,17 +1,17 @@
-# frozen_string_literal: true
+# frozen_string_lit', price: '300' },
 
 DRINKS = [
-  { name: 'コーヒー', price: '300' },
-  { name: 'カフェラテ', price: '400' },
-  { name: 'チャイ', price: '460' },
-  { name: 'エスプレッソ', price: '340' },
-  { name: '緑茶', price: '450' }
+  { name: 'coffee', price: '400' },
+  { name: 'cafelatte', price: '460' },
+  { name: 'chai', price: '340' },
+  { name: 'espresso', price: '340' },
+  { name: 'tea', price: '450' }
 ].freeze
 
 FOODS = [
-  { name: 'チーズケーキ', price: '470' },
-  { name: 'アップルパイ', price: '520' },
-  { name: 'ホットサンド', price: '410' }
+  { name: 'cheesecake', price: '470' },
+  { name: 'applepie', price: '520' },
+  { name: 'hotsand', price: '410' }
 ].freeze
 
 def take_order(menus)
@@ -19,16 +19,31 @@ def take_order(menus)
     puts "(#{i})#{menu[:name]}: #{menu[:price]}円"
   end
   print '>'
+
   order_number = gets.to_i
+  order_number = order_number - 1
   puts "#{menus[order_number][:name]}(#{menus[order_number][:price]}円)ですね。"
-  order_number
 end
 
-puts 'bugカフェへようこそ！ご注文は？ 番号でどうぞ'
-order1 = take_order(DRINKS)
+puts 'welcome to BugCafe! May help you? Please tell me the number'
+DRINKS.each.with_index(1) do |menu, i|
+  puts "(#{i})#{menu[:name]}: #{menu[:price]}円"
+end
+print '>'
+order_number = gets.to_i
+order_number = order_number - 1
+order1 = order_number
+puts "#{DRINKS[order_number][:name]}(#{DRINKS[order_number][:price]}円)ですね。"
 
-puts 'フードメニューはいかがですか?'
-order2 = take_order(FOODS)
+puts 'How about foods?'
+FOODS.each.with_index(1) do |menu, i|
+  puts "(#{i})#{menu[:name]}: #{menu[:price]}円"
+end
+print '>'
+order_number = gets.to_i
+order_number = order_number - 1
+order2 = order_number
+puts "#{FOODS[order_number][:name]}(#{FOODS[order_number][:price]}円)ですね。"
 
-total = FOODS[order1][:price] + DRINKS[order2][:price]
-puts "お会計は#{total}円になります。ありがとうございました！"
+total = DRINKS[order1][:price].to_i + FOODS[order2][:price].to_i
+puts "It's#{total}yen! Thanks!"
